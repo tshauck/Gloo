@@ -7,30 +7,29 @@ use of IPython and Pandas.
 
 A quick workflow example::
     
-    import projectmanager as pm
+    from gloo import interactive    
 
-    pm.create_project("MyProject")
+    interactive.create_project("MyProject")
 
     #now if we have some some scripts to use and some data in the data folder we
     #can load the project
 
-    pm.load_project()
+    interactive.load_project()
 
 Introduction
 ============
 
-ProjectManager's goal is to facilitate quickly loading data into the IPython
-environment, help to automate data munging that would need to be done at the
-start of a session, load helper functions in, and give you a nice directory.
+Gloo's goal is to tie together a lot of the data analysis actions that happen
+regularly and make that processes easy.  Automatically loading data into the
+ipython environment, running scripts, making utitlity functions available.
+These are things that have to be done often, but aren't the fun part.
 
 What Happens When You Call create_project("MyProject")
 ---------------------------------------------------------
 
-``create_project(project_name = "MyProject", config = {})``
+``create_project(project_name = "MyProject", **kwds)``
 
 ``project_name``: This is a string that is the name of your project.
-
-``config``: This is a dict that takes configuration options.
 
 Current Config Options:
   ``full_structure`` A boolean that if true creates a full folder structure.  If
