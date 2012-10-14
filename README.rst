@@ -6,8 +6,8 @@ Provides utilities and functions for managing data projects in python.  Requires
 use of IPython and Pandas.
 
 A quick workflow example::
-    
-    from gloo import interactive    
+
+    from gloo import interactive
 
     interactive.create_project("MyProject")
 
@@ -34,7 +34,7 @@ What Happens When You Call create_project("MyProject")
 Current Config Options:
   ``full_structure`` A boolean that if true creates a full folder structure.  If
   True the folder structure outline below.  Defaults to True.
-  
+
   ``packages`` A list of strings of python packages to load when
   ``load_project()`` is called.  Defaults to empty.
 
@@ -66,7 +66,7 @@ What Happens When You Call load_project()
 Folder Structure
 ----------------
 The full structure is as follows::
-    
+
     data/        : data  
     doc/         : documentation  
     diagnostics/ : automatically check for data issues  
@@ -76,7 +76,14 @@ The full structure is as follows::
     profiling/   : benchmark performance  
     reports/     : reports you'll produce  
     tests/       : tests
-    
+
+Installing Gloo
+===============
+
+* ``pip install Gloo`` is available.
+* There is also an ubuntu package available on `LaunchPad
+  <https://code.launchpad.net/~pythonxy/+recipe/gloo-daily`_
+* Gloo currently isn't supported on Windows
 
 Contributing
 ============
