@@ -82,7 +82,7 @@ Installing Gloo
 
 * ``pip install Gloo`` is available.
 * There is also an ubuntu package available on `LaunchPad
-  <https://code.launchpad.net/~pythonxy/+recipe/gloo-daily>`_
+  <https://code.launchpad.net/~pythonxy/+archive/pythonxy-devel>`_
 * Gloo currently isn't supported on Windows
 
 Contributing
