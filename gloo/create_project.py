@@ -2,10 +2,10 @@ def create_project(project_name = 'DataProject', **keywords):
     """
     Creates the project and creates a skelton directory
     structure
-    
+
     Params:
       project_name: A string that represents the name of the project
-    
+
       keywords:
         git: create a git repo? type bool, default false
         full_structure: create a full strucutre? type bool, default false
@@ -40,19 +40,8 @@ def create_project(project_name = 'DataProject', **keywords):
 
     #Create files
     os.system('touch README.txt')
-    #os.system('touch __init__.py')
-    #os.system('touch data/__init__.py')
-    #os.system('touch lib/__init__.py')
-    #os.system('touch munge/__init__.py')
 
-    #modify python path, put the project on it, removed when project destoryed
-    #get join to work properly
-    #os.environ['PYTHONPATH'] = \
-            #os.environ['PYTHONPATH'] + '/:' +  os.getcwd()
-    #os.system('export PYTHONPATH=$PYTHONPATH/:%s' % os.getcwd())
-    #print 'export PYTHONPATH=$PYTHONPATH:%s' % os.getcwd()
-
-    #Creatgit repo
+    #Create git repo
     if config['git']:
         os.system('git init --quiet')
 

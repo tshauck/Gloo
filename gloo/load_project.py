@@ -1,21 +1,21 @@
 def load_project():
     """
     Loads the project into the workspace
-    
-    Does three things currently
+
+    Does four things currently
       1. Recursively loads you csv files into data frames
          prepending the folder if not in data
       2. Runs files in the munge folder.  These are
          preprocessing scripts
       3. Imports files in lib
       4. Starts Logging
-    
+
     """
     from os import listdir, chdir, walk, getcwd
     from os.path import join, split
     from pandas import read_csv
     from json import load
-    
+
     shell = get_ipython()
 
     with open('.config.json', 'r') as f:
