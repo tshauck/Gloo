@@ -22,7 +22,7 @@ def create_project(project_name = 'DataProject', **keywords):
     #Set up config
     config = {}
 
-    config['git'] = keywords.get('git', False)
+    config['vcs'] = keywords.get('vcs', False)
     config['full_structure'] = keywords.get('full_structure', False)
     config['packages'] = keywords.get('package', [])
     config['logging'] = keywords.get('logging', False)
@@ -42,8 +42,21 @@ def create_project(project_name = 'DataProject', **keywords):
     os.system('touch README.txt')
 
     #Create git repo
-    if config['git']:
-        os.system('git init --quiet')
+    supported_vcs = ['git', 'bzr']
+    if config['vcs']:
+        if isinstance(config['vcs'], list):
+            for vcs in config['vcs']:
+                if vcs in supported_vcs:
+                    os.system('%s init --quiet' % vcs)
+                else:
+                    raise NameError('vcs %s is not supported' % vcs)
+        elif isinstance(config['vcs'], str):
+            if config['vcs'] in supported_vcs:
+                os.system('%s init --quiet' % config['vcs'])
+            else:
+                raise NameError('vcs %s is not supported' % config['vcs'])
+        else:
+            raise TypeError('Only lists or stings are supported')
 
     #Dump into config file
     with open('.config.json', mode='w') as f:
