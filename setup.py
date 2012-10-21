@@ -11,5 +11,5 @@ setup(
     license='LICENSE.txt',
     description='Project management for data analysis projects.',
     #install_requires=[],
-    long_description=open('README.rst').read()
+    #long_description=open('README.rst').read()
 )
