@@ -45,6 +45,11 @@ proj = Gloo('My Project', full_structure, packages=['scipy',
                                           ('numpy', 'np')])
 
 proj.create_project()
+
+#Now once you've done some stuff, and come back later
+proj.load_project()
+##the packages will be available, and any data you put in the data folder
+#will be available as pandas DataFrames.
 </code></pre>
 
 <h1>Introduction</h1>
