@@ -2,15 +2,11 @@ import pickle
 import os
 import pandas
 
-class Gloo():
 
+class Gloo():
 
     def __init__(self, project_name="My Project", vcs=None,
                  full_structure=None, packages=None, logging=None):
-
-        #Load .gloo if available
-        #First try to load from current directory... if we can't load from 
-        #the project_name directory
 
         self.project_name = project_name
         self.config_file = ".gloo"
@@ -62,7 +58,7 @@ class Gloo():
         os.chdir(self.project_name)
 
         if self.full_structure:
-            folders = ['data', 'diagnostics', 'doc', 'graphs', \
+            folders = ['data', 'diagnostics', 'doc', 'graphs',
                         'lib', 'reports', 'profiling', 'tests', 'munge']
         else:
             folders = ['data', 'lib', 'munge']
@@ -115,6 +111,7 @@ class Gloo():
 
         filename = lambda x: x.split('.')[0]
 
+        #Push variables namespace
         vars_to_push = {}
         for directory, _, datafiles in os.walk('data', topdown=False):
             for datafile in datafiles:
@@ -129,10 +126,12 @@ class Gloo():
                     vars_to_push[var_name] = pandas.read_csv(read_location)
         shell.push(vars_to_push)
 
+        #Run munge file
         mungefiles = os.listdir('munge')
         for mungefile in mungefiles:
             shell.magic('run -i munge/%s' % mungefile)
 
+        #import lib files
         libfiles = os.listdir('lib')
         libs_to_push = {}
         os.chdir('lib')
@@ -142,10 +141,15 @@ class Gloo():
         shell.push(libs_to_push)
         os.chdir('..')
 
-        packages = self.packages
-        for package in packages:
-            shell.runcode('import %s' % package)
+        #Import packages
+        if self.packages:
+            packages = self.packages
+            for package in packages:
+                shell.runcode('import %s' % package)
 
         if config['logging']:
-          shell.magic_logstart(os.getcwd().split('/')[-1] \
+            shell.magic_logstart(os.getcwd().split('/')[-1]
               + '_logging.py append')
+
+    def save_project(self):
+        self._write_to_config()

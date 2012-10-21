@@ -4,7 +4,7 @@ p1
 I01
 sS'project_name'
 p2
-S'test_project'
+S'new_test'
 p3
 sS'logging'
 p4
@@ -12,4 +12,9 @@ NsS'vcs'
 p5
 NsS'packages'
 p6
-Ns.
+(lp7
+S'json'
+p8
+aS'pickle'
+p9
+as.
