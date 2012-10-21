@@ -48,7 +48,7 @@ project directory.
 What Happens When You Call load_project()
 -----------------------------------------
 
-``load_project()``
+``proj.load_project()``
 
 1.  The config is loaded into a dictionary.
 2.  Data is the ``data`` directory is loaded into the environment.  This is done
@@ -58,7 +58,9 @@ What Happens When You Call load_project()
 3.  Files in the ``munge`` directory are run.  This folder is where you would
     put files necessary for preprocessing the data.
 4.  Files in the ``lib`` directory are imported.  This folder is where you would
-    put files that you would like to load as a module.
+    put files that you would like to load as a module.  So if you have
+    utility.py in the lib directory.  When you load the project you'll have
+    utility availble in the namespace.
 5.  Packages specified in the config are loaded into the environment.
 6.  Logging starts
 
@@ -75,6 +77,19 @@ The full structure is as follows::
     profiling/   : benchmark performance  
     reports/     : reports you'll produce  
     tests/       : tests
+
+Other things you can do
+----------------------
+You can update the config.  Say you have ``packages = ['numpy']`` but once
+you've worked on the project you realize you need pandas and you want to load
+it as pd.  It's easy to update this of the future::
+
+    >   proj.packages
+        ['numpy']
+    >   proj.packages.append(('pandas', 'pd'))
+    >   proj.save_project()
+
+So next time you load the project pandas as pd will be available.
 
 Installing Gloo
 ===============
