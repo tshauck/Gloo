@@ -1,5 +1,5 @@
 ==============
-ProjectManager
+A Data Project Manager for IPython
 ==============
 
 Provides utilities and functions for managing data projects in python.  Requires
@@ -7,43 +7,42 @@ use of IPython and Pandas.
 
 A quick workflow example::
 
-    from gloo import interactive
+    from gloo import Gloo
 
-    interactive.create_project("MyProject")
+    proj = Gloo('My Project', full_structure, packages=['scipy',
+                                              ('numpy', 'np')])
 
-    #now if we have some some scripts to use and some data in the data folder we
-    #can load the project
-
-    interactive.load_project()
+    proj.create_project()
 
 Introduction
 ============
 
 Gloo's goal is to tie together a lot of the data analysis actions that happen
 regularly and make that processes easy.  Automatically loading data into the
-ipython environment, running scripts, making utitlity functions available.
-These are things that have to be done often, but aren't the fun part.
+ipython environment, running scripts, making utitlity functions available and
+more.  These are things that have to be done often, but aren't the fun part.
 
-What Happens When You Call create_project("MyProject")
+proj.create_project() Options
 ---------------------------------------------------------
-
-``create_project(project_name = "MyProject", **kwds)``
 
 ``project_name``: This is a string that is the name of your project.
 
 Current Config Options:
-  ``full_structure`` A boolean that if true creates a full folder structure.  If
-  True the folder structure outline below.  Defaults to True.
+  ``full_structure``  If True the folder structure outline below.  By default 
+  creates smaller project, i.e. False.
 
   ``packages`` A list of strings of python packages to load when
-  ``load_project()`` is called.  Defaults to empty.
+  ``load_project()`` is called.  Defaults to empty.  If you want to alias your
+  package you can pass a tuple to the list.  ``['scipy', ('numpy', 'np')]``
+  will import scipy as scipy and numpy as np.
 
   ``logging`` A boolean to dictate if logging is started when
   ``load_project()`` is called.  Defaults to False.
 
-  ``git`` A boolean to dictate if a git repo is init'd.  Defaults to False.
+  ``svn`` Pass a list or a string to init version control.  Currently supports
+  git and bzr.  ``svn = ['git', 'bzr']`` will init both.
 
-Those options are saved into a json file called .config.json at the root of the
+Those options are saved into a pickled file called .gloo at the root of the
 project directory.
 
 What Happens When You Call load_project()

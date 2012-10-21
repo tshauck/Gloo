@@ -24,7 +24,8 @@ class Gloo():
             if os.path.basename(os.getcwd()) == self.project_name:
                 cf = file(self.config_file, 'r')
             else:
-                cf = file(self.project_name + '/' + self.config_file, 'r')
+                cf = file(os.path.join(self.project_name,
+                                       self.config_file), 'r')
 
             cnfg_dict = pickle.load(cf)
             cf.close()
@@ -145,7 +146,11 @@ class Gloo():
         if self.packages:
             packages = self.packages
             for package in packages:
-                shell.runcode('import %s' % package)
+                if isinstance(package, str):
+                    shell.runcode('import %s' % package)
+                elif isinstance(package, tuple):
+                    package_name, alias = package
+                    shell.runcode('import %s as %s' % (package_name, alias))
 
         if config['logging']:
             shell.magic_logstart(os.getcwd().split('/')[-1]
