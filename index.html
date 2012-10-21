@@ -46,10 +46,12 @@ proj = Gloo('My Project', full_structure, packages=['scipy',
 
 proj.create_project()
 
-#Now once you've done some stuff, and come back later
+#Now say you've done some work, added some data, and munge files.  And come
+#back the next day, fire up IPython in the project directory.
+proj = Gloo('My Project')
 proj.load_project()
 ##the packages will be available, and any data you put in the data folder
-#will be available as pandas DataFrames.
+#will be available as pandas DataFrames and those packages defined above
 </code></pre>
 
 <h1>Introduction</h1>
