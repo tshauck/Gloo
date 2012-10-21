@@ -30,54 +30,55 @@
       <section>
         <h1></h1>
 
-<h1>ProjectManager</h1>
+<h1>A Data Project Manager for IPython</h1>
+
+<p>Written by <a href="http://trenthauck.com">Trent Hauck</a>.</p>
 
 <p>Provides utilities and functions for managing data projects in python.  Requires
 use of IPython and Pandas.</p>
 
 <p>A quick workflow example::</p>
 
-<pre><code>from gloo import interactive
+<pre><code>from gloo import Gloo
 
-interactive.create_project("MyProject")
+proj = Gloo('My Project', full_structure, packages=['scipy',
+                                          ('numpy', 'np')])
 
-#now if we have some some scripts to use and some data in the data folder we
-#can load the project
-
-interactive.load_project()
+proj.create_project()
 </code></pre>
 
 <h1>Introduction</h1>
 
 <p>Gloo's goal is to tie together a lot of the data analysis actions that happen
 regularly and make that processes easy.  Automatically loading data into the
-ipython environment, running scripts, making utitlity functions available.
-These are things that have to be done often, but aren't the fun part.</p>
+ipython environment, running scripts, making utitlity functions available and
+more.  These are things that have to be done often, but aren't the fun part.</p>
 
-<h2>What Happens When You Call create_project("MyProject")</h2>
-
-<p><code>create_project(project_name = "MyProject", **kwds)</code></p>
+<h2>proj.create_project() Options</h2>
 
 <p><code>project_name</code>: This is a string that is the name of your project.</p>
 
 <p>Current Config Options:
-  <code>full_structure</code> A boolean that if true creates a full folder structure.  If
-  True the folder structure outline below.  Defaults to True.</p>
+  <code>full_structure</code>  If True the folder structure outline below.  By default 
+  creates smaller project, i.e. False.</p>
 
 <p><code>packages</code> A list of strings of python packages to load when
-  <code>load_project()</code> is called.  Defaults to empty.</p>
+  <code>load_project()</code> is called.  Defaults to empty.  If you want to alias your
+  package you can pass a tuple to the list.  <code>['scipy', ('numpy', 'np')]</code>
+  will import scipy as scipy and numpy as np.</p>
 
 <p><code>logging</code> A boolean to dictate if logging is started when
   <code>load_project()</code> is called.  Defaults to False.</p>
 
-<p><code>git</code> A boolean to dictate if a git repo is init'd.  Defaults to False.</p>
+<p><code>svn</code> Pass a list or a string to init version control.  Currently supports
+  git and bzr.  <code>svn = ['git', 'bzr']</code> will init both.</p>
 
-<p>Those options are saved into a json file called .config.json at the root of the
+<p>Those options are saved into a pickled file called .gloo at the root of the
 project directory.</p>
 
 <h2>What Happens When You Call load_project()</h2>
 
-<p><code>load_project()</code></p>
+<p><code>proj.load_project()</code></p>
 
 <ol>
 <li> The config is loaded into a dictionary.</li>
@@ -88,7 +89,9 @@ to make the prepending optional.</li>
 <li> Files in the <code>munge</code> directory are run.  This folder is where you would
 put files necessary for preprocessing the data.</li>
 <li> Files in the <code>lib</code> directory are imported.  This folder is where you would
-put files that you would like to load as a module.</li>
+put files that you would like to load as a module.  So if you have
+utility.py in the lib directory.  When you load the project you'll have
+utility availble in the namespace.</li>
 <li> Packages specified in the config are loaded into the environment.</li>
 <li> Logging starts</li>
 </ol><h2>Folder Structure</h2>
@@ -106,13 +109,26 @@ reports/     : reports you'll produce
 tests/       : tests
 </code></pre>
 
+<h2>Other things you can do</h2>
+
+<p>You can update the config.  Say you have <code>packages = ['numpy']</code> but once
+you've worked on the project you realize you need pandas and you want to load
+it as pd.  It's easy to update this of the future::</p>
+
+<pre><code>&gt;   proj.packages
+    ['numpy']
+&gt;   proj.packages.append(('pandas', 'pd'))
+&gt;   proj.save_project()
+</code></pre>
+
+<p>So next time you load the project pandas as pd will be available.</p>
+
 <h1>Installing Gloo</h1>
 
 <ul>
 <li>
 <code>pip install Gloo</code> is available.</li>
-<li>There is also an ubuntu package available on <code>LaunchPad
-&lt;https://code.launchpad.net/~pythonxy/+archive/pythonxy-devel&gt;</code>_</li>
+<li>There is also an ubuntu package available on LaunchPage</li>
 <li>Gloo currently isn't supported on Windows</li>
 </ul><h1>Contributing</h1>
 
@@ -123,8 +139,7 @@ working with python for data projets.</p>
 <h1>Thanks</h1>
 
 <p>This project is a bit of a rip-off or port (however nice you're feeling) of
-<code>Project Template &lt;http://www.projecttemplate.net&gt;</code>_, which if
-you're using R I would highly recommend.  It's fantastic.</p>
+Project Template, which ifyou're using R I would highly recommend.  It's fantastic.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/tshauck">tshauck</a></p>
