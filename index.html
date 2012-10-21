@@ -28,7 +28,103 @@
         </ul>
       </header>
       <section>
-        <h1>Gloo Rocks</h1>
+        <h1></h1>
+
+<h1>ProjectManager</h1>
+
+<p>Provides utilities and functions for managing data projects in python.  Requires
+use of IPython and Pandas.</p>
+
+<p>A quick workflow example::</p>
+
+<pre><code>from gloo import interactive
+
+interactive.create_project("MyProject")
+
+#now if we have some some scripts to use and some data in the data folder we
+#can load the project
+
+interactive.load_project()
+</code></pre>
+
+<h1>Introduction</h1>
+
+<p>Gloo's goal is to tie together a lot of the data analysis actions that happen
+regularly and make that processes easy.  Automatically loading data into the
+ipython environment, running scripts, making utitlity functions available.
+These are things that have to be done often, but aren't the fun part.</p>
+
+<h2>What Happens When You Call create_project("MyProject")</h2>
+
+<p><code>create_project(project_name = "MyProject", **kwds)</code></p>
+
+<p><code>project_name</code>: This is a string that is the name of your project.</p>
+
+<p>Current Config Options:
+  <code>full_structure</code> A boolean that if true creates a full folder structure.  If
+  True the folder structure outline below.  Defaults to True.</p>
+
+<p><code>packages</code> A list of strings of python packages to load when
+  <code>load_project()</code> is called.  Defaults to empty.</p>
+
+<p><code>logging</code> A boolean to dictate if logging is started when
+  <code>load_project()</code> is called.  Defaults to False.</p>
+
+<p><code>git</code> A boolean to dictate if a git repo is init'd.  Defaults to False.</p>
+
+<p>Those options are saved into a json file called .config.json at the root of the
+project directory.</p>
+
+<h2>What Happens When You Call load_project()</h2>
+
+<p><code>load_project()</code></p>
+
+<ol>
+<li> The config is loaded into a dictionary.</li>
+<li> Data is the <code>data</code> directory is loaded into the environment.  This is done
+recursively so you can have subdirectories.  If you do, the parent folder of
+the data file will be prepended to data file, <code>folder_file</code>.  The plan is
+to make the prepending optional.</li>
+<li> Files in the <code>munge</code> directory are run.  This folder is where you would
+put files necessary for preprocessing the data.</li>
+<li> Files in the <code>lib</code> directory are imported.  This folder is where you would
+put files that you would like to load as a module.</li>
+<li> Packages specified in the config are loaded into the environment.</li>
+<li> Logging starts</li>
+</ol><h2>Folder Structure</h2>
+
+<p>The full structure is as follows::</p>
+
+<pre><code>data/        : data  
+doc/         : documentation  
+diagnostics/ : automatically check for data issues  
+graphs/      : graph domicile  
+lib/         : utility functions  
+munge/       : preprocessing scripts  
+profiling/   : benchmark performance  
+reports/     : reports you'll produce  
+tests/       : tests
+</code></pre>
+
+<h1>Installing Gloo</h1>
+
+<ul>
+<li>
+<code>pip install Gloo</code> is available.</li>
+<li>There is also an ubuntu package available on <code>LaunchPad
+&lt;https://code.launchpad.net/~pythonxy/+archive/pythonxy-devel&gt;</code>_</li>
+<li>Gloo currently isn't supported on Windows</li>
+</ul><h1>Contributing</h1>
+
+<p>Because this project is in such an early state I would love for anybody and
+everybody to help contribute.  I think this could be very valuable for those
+working with python for data projets.</p>
+
+<h1>Thanks</h1>
+
+<p>This project is a bit of a rip-off or port (however nice you're feeling) of
+<code>Project Template &lt;http://www.projecttemplate.net&gt;</code>_, which if
+you're using R I would highly recommend.  It's fantastic.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/tshauck">tshauck</a></p>
