@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='Gloo',
-    version='0.1.0',
+    version='0.1.1',
     author='Trent Hauck',
     author_email='trent@trenthauck.com',
     packages=['gloo'],

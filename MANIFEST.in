@@ -1,5 +1,3 @@
 include *.txt
 include README.rst
-recursive-include docs *.txt
-recursive-include docs *.rst
 include MANIFEST.in
