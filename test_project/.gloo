@@ -1,0 +1,15 @@
+(dp0
+S'full_structure'
+p1
+I01
+sS'project_name'
+p2
+S'test_project'
+p3
+sS'logging'
+p4
+NsS'vcs'
+p5
+NsS'packages'
+p6
+Ns.
